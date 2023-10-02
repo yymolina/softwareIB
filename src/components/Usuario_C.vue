@@ -1,4 +1,5 @@
 <template>
+  <div v-if="isAdmin">
   <v-data-table :headers="headers" :items="desserts" :sort-by="[{ key: 'calories', order: 'asc' }]" class="elevation-1">
     <template v-slot:top>
       <v-toolbar flat style=" border: none; padding: 18px;">
@@ -24,7 +25,7 @@
                     <v-text-field v-model="editedItem.id" label="id"></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.rol" label="Rol"></v-text-field>
+                    <v-text-field v-model="editedItem.rol" label="Role"></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field v-model="editedItem.usuario" label="Usuario"></v-text-field>
@@ -89,9 +90,11 @@
     <template v-slot:no-data>
     </template>
   </v-data-table>
+</div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import db from '../firebase/init.js'
 import { collection, getDocs, query, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore'
 
@@ -107,7 +110,7 @@ export default {
         key: 'name',
       },
       { title: 'Id', key: 'id' },
-      { title: 'Rol', key: 'rol' },
+      { title: 'Role', key: 'rol' },
       { title: 'Usuario', key: 'usuario' },
       { title: 'Clave', key: 'clave' },
       { title: 'Nombre', key: 'nombre' },
@@ -122,32 +125,37 @@ export default {
     editedIndex: -1,
     editedItem: {
       keyid: '',
-      id: ' ',
-      rol: ' ',
-      usuario: ' ',
-      clave: ' ',
-      nombre: ' ',
-      apellido: ' ',
-      email: ' ',
-      direccion: ' ',
-      departamento: ' ',
-      pais: ' ',
+      id: '',
+      rol: '',
+      usuario: '',
+      clave: '',
+      nombre: '',
+      apellido: '',
+      email: '',
+      direccion: '',
+      departamento: '',
+      pais: '',
     },
     defaultItem: {
-      id: ' ',
-      rol: ' ',
-      usuario: ' ',
-      clave: ' ',
-      nombre: ' ',
-      apellido: ' ',
-      email: ' ',
-      direccion: ' ',
-      departamento: ' ',
-      pais: ' ',
+      id: '',
+      rol: '',
+      usuario: '',
+      clave: '',
+      nombre: '',
+      apellido: '',
+      email: '',
+      direccion: '',
+      departamento: '',
+      pais: '',
     },
   }),
 
   computed: {
+    ...mapState(['userData']),
+    isAdmin() {
+      return this.userData && this.userData.rol === 'admin';
+    },
+  
     formTitle() {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
     },
@@ -253,16 +261,16 @@ export default {
     initialize() {
       this.desserts = [
         {
-          id: ' ',
-          rol: ' ',
-          usuario: ' ',
-          clave: ' ',
-          nombre: ' ',
-          apellido: ' ',
-          email: ' ',
-          direccion: ' ',
-          departamento: ' ',
-          pais: ' ',
+          id: '',
+          rol: '',
+          usuario: '',
+          clave: '',
+          nombre: '',
+          apellido: '',
+          email: '',
+          direccion: '',
+          departamento: '',
+          pais: '',
         },
 
       ]

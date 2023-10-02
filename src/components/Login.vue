@@ -1,33 +1,26 @@
 <template>
   <!-- Contenedor principal con imagen de fondo -->
-  <div
-    style="background: linear-gradient(45deg, #ffff, #919290); background-size: cover; background-repeat: no-repeat; background-position: center; height: 100vh; display: flex; justify-content: center; align-items: center;">
+  <div style="position: relative; width=100%; height: auto;">
+
+    <!-- Imagen de fondo -->
+    <v-img width="100%" height="100%" object-fit="cover" style="background-size: cover; background-repeat: no-repeat; background-position: center;" src="../assets/fondop.png"></v-img>
 
     <!-- Tarjeta flotante en el centro -->
-    <v-card style="display: flex; max-width: 900px; width: 80%; border-radius: 10px;">
-
-      <!-- Lado izquierdo: Imagen -->
-      <div style="flex: 1;">
-        <v-img width="100%" height="100%" object-fit="cover" src="../assets/log1.jpg" />
-      </div>
+    <v-card style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 450px; width: 80%; border-radius: 10px;">
 
       <!-- Lado derecho: Formulario de inicio de sesión -->
-      <div style="flex: 1;">
-        <div class="text-subtitle-1 text-medium-emphasis">Hola !</div>
-        <div style="color: #DF4CF2; padding-bottom: 30px;">Bienvenido</div>
-        <div style=" padding-bottom: 50px; padding-left: 35%;" class="text-subtitle-1 text-medium-emphasis">Iniciar Sesión
-        </div>
-        <v-text-field v-model="username" density="compact" placeholder="Usuario" prepend-inner-icon="mdi-account"
-          variant="outlined"></v-text-field>
-        <v-text-field v-model="password" :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
-          :type="visible ? 'text' : 'password'" density="compact" placeholder="Contraseña" prepend-inner-icon="mdi-lock"
-          variant="outlined" @click:append-inner="visible = !visible"></v-text-field>
-        <v-btn block class="mb-8" color="#ffff" size="large" variant="tonal" @click="login"
-          style="background: linear-gradient(45deg, #6949EA, #DF4CF2);">Entrar</v-btn>
+      <div style="flex: 1; padding: 50px;">
+        <div style="background: linear-gradient(45deg, #6949EA, #DF4CF2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; justify-content: center; display: flex; font-size: 40px; margin-bottom: 20px; font-weight: 600;">Bienvenido I&B</div>
+        <div style="justify-content: center; display: flex; color: #919290; font-size: 30px; margin-bottom: 20px; font-weight: 100; text-shadow: 1px 2px 1px #df4cf2;">Iniciar Sesión</div>
+        <v-text-field v-model="username" density="compact" placeholder="Usuario" prepend-inner-icon="mdi-account" variant="outlined"></v-text-field>
+        <v-text-field v-model="password" :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'" :type="visible ? 'text' : 'password'" density="compact" placeholder="Contraseña" prepend-inner-icon="mdi-lock" variant="outlined" @click:append-inner="visible = !visible"></v-text-field>
+        <v-btn block class="mb-8" color="#ffff" size="large" variant="tonal" @click="login" style="background: linear-gradient(45deg, #6949EA, #DF4CF2);">Entrar</v-btn>
       </div>
+
     </v-card>
   </div>
 </template>
+
 
 <script>
 import db from '../firebase/init.js'

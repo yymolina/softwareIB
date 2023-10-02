@@ -86,12 +86,12 @@ export default {
     desserts: [],
     editedIndex: -1,
     editedItem: {
-      id: ' ',
-      categ: ' ',
+      id: '',
+      categ: '',
     },
     defaultItem: {
-      id: ' ',
-      categ: ' ',
+      id: '',
+      categ: '',
     },
   }),
 
